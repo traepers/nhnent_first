@@ -32,25 +32,6 @@ public class BoardDAO extends DAOimpl {
 		jdbcTemplate.execute(sql);
 	}
 	
-	@Override
-	public VO getEmp(String name) {
-		String sql = "select * from board where name = ?";
-		// RowMapper는 ResultSet의 레코드와 객체를 매핑시키는 역할을 한다.
-		RowMapper mapper = new RowMapper(){
-			public Object mapRow(ResultSet rs, int rowNum) throws SQLException{
-				BoardVO bVO = new BoardVO();
-				bVO.setId(rs.getInt("b_id"));
-				bVO.setEmail(rs.getString("b_email"));
-				bVO.setContent(rs.getString("b_content"));
-				bVO.setTime(rs.getString("b_time"));
-				bVO.setPass(rs.getString("b_pass"));
-				return bVO;
-			}
-		};
-		// 입력 받은 name을 queryForObject 실행 인자로 사용하기 위해 Object[]로 변경.
-		Object[] args = {name};
-		return jdbcTemplate.queryForObject(sql, args, mapper);
-	}
 
 	@Override
 	public List<VO> searchAll() {

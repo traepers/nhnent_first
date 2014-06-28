@@ -57,10 +57,9 @@ content {
 		window.open("/updateContent?id=" + id + "&content=" + content);
 	});
 
-	function updateContent(id) {
-		//	var id = 1;
-		var content = "zz";
-		window.open("updateContentForm.jsp?id=" + id + "&content=" + content); //
+	function updateContent(id, content, pass) {
+	//	content = content.split(' ').join("~");
+		window.open("updateContentForm.jsp?id=" + id + "&content=" + content+"&pass="+pass); //
 		/*
 		$.ajax({
 			url : "/updateContent?id=" + id + "&content=" + content
@@ -82,14 +81,15 @@ content {
 <body>
 	<div id="fixed-menu">
 		<div align="center">
-			<h2>nhn enter first warm-up</h2>
+			<h2> 방명록 </h2>
 		</div>
 	</div>
 
+<!-- 
 	<P>The time on the server is ${serverTime}.</P>
-
-	<P>갯수 : ${board_length}</P>
-
+ -->
+	<P> 방명록 글자 수 : ${board_length}</P>
+ 
 	<table border=1>
 		<%
 			int size = (Integer) request.getAttribute("board_length");
@@ -100,15 +100,11 @@ content {
 		<tr>
 			<td><%=boardVOArr[i].getEmail()%></td>
 			<td><a href="#"> <span
-					onclick="javascript:updateContent(\''+<%=boardVOArr[i].getId()%>+\'')"> <%=boardVOArr[i].getContent()%>
+					onclick="javascript:updateContent('<%=boardVOArr[i].getId()%>', '<%=boardVOArr[i].getContent()%>', '<%=boardVOArr[i].getPass()%>')">
+						<%=boardVOArr[i].getContent()%>
 				</span>
-			</a> <!--  
-				<button type="button"
-					onclick="location.href='javascript:updateContent(2);' ">
-				</button>
-			--></td>
+			</a></td>
 			<td><%=boardVOArr[i].getTime()%></td>
-			<td><%=boardVOArr[i].getPass()%></td>
 		</tr>
 		<%
 			}

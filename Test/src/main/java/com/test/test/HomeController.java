@@ -30,25 +30,16 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-//		/*
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
-//		 */
+
 		ApplicationContext ac = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
 
 		// EmpDao 객체를 생성.
 		BoardDAO bDao = (BoardDAO) ac.getBean("BoardDao");
-		//			//= new EmpDao();  //  
-		//			Emp emp = new Emp();
-		//			emp.setName("hong gil dong");
-		//			emp.setTitle("사원");
-		//			emp.setEmail("hong@korea.com");
-		//			emp.setPhone("010-123-4567");
-		//			empdao.add(emp);	
 		List lboard = (List)bDao.searchAll();
 		Iterator empIter= lboard.iterator();
 		model.addAttribute("board_length", lboard.size() );

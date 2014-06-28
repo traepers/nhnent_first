@@ -19,9 +19,17 @@ fixed-menu {
 		alert("테스트");
 	});
 	
-	function formOpen(){
-		window.open("form.jsp");
+	function validateForm() {
+	    var x = document.forms["myform"]["email"].value;
+	    var atpos = x.indexOf("@");
+	    var dotpos = x.lastIndexOf(".");
+	    if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+	        alert("Not a valid e-mail address");
+	        return false;
+	    }
+	    return true;
 	}
+	
 </script>
 
 <title>NHN Enter first warm-up</title>
@@ -34,13 +42,14 @@ fixed-menu {
 		</div>
 	</div>
 
-	<form action="/writeBoard" method="GET">
-		이메일 : <input type="text" name="email"><br> <!-- javascript 폼 체크 -->
+	<form id="myform" action="/test/writeBoard" method="GET" onsubmit="return validateForm();">
+		이메일 : <input id="email" type="text" name="email"><br> <!-- javascript 폼 체크 -->
 		내용: <input type="text" name="content"><br> 
 		비밀번호: <input type="password" name="pass"><br> 
 		<input type="submit" value="제출">
 	</form>
 
+	
 
 </body>
 </html>

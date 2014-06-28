@@ -6,9 +6,41 @@
 <%
 	int id = Integer.parseInt(request.getParameter("id"));
 	String content = (String) request.getParameter("content");
+	String pass = (String) request.getParameter("pass");
 %>
+<html>
+<head>
+<style>
+fixed-menu {
+	width: 100%;
+	height: 80px;
+	background-color: black;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+</style>
 
-<form action="/updateContent" method="GET">
-	id : <input type="text" name="id" value=<%=id%> ><br>
-	내용: <input type="text" name="content" value=<%=content%>><br> 
-</form>
+<title>NHN Enter first warm-up</title>
+
+</head>
+
+<body>
+	<div id="fixed-menu">
+		<div align="center">
+			<h2>글 수정하기</h2>
+		</div>
+	</div>
+	<form action="/test/updateContent" method="POST" >
+		<input type="hidden" name="id" value=<%=id%>><br /> 
+		<!--  
+		<input type="hidden" name="pass" value='<%=pass%>'><br />
+		-->
+		
+		내용: <input type="text" name="content" value='<%=content%>'><br/> 		
+		비밀번호: <input type="text" name="update_pass" ><br/> 
+		<input type="submit" value="수정">
+	</form>
+
+</body>
+</html>

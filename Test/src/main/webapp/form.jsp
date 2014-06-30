@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
+<html ng-app>
 <head>
 <style>
 fixed-menu {
@@ -13,7 +14,7 @@ fixed-menu {
 }
 
 </style>
-
+<script src="<c:url value="/resources/js/angular.min.js" />"></script>
 <script>
 	$(document).ready(function() {
 		alert("테스트");
@@ -36,20 +37,25 @@ fixed-menu {
 
 </head>
 <body>
+<div align="center">
 	<div id="fixed-menu">
-		<div align="center">
+		
 			<h2>새로운 글 게시</h2>
-		</div>
+		
 	</div>
 
+
+
 	<form id="myform" action="/test/writeBoard" method="GET" onsubmit="return validateForm();">
-		이메일 : <input id="email" type="text" name="email"><br> <!-- javascript 폼 체크 -->
+		이메일 : <input id="email" type="text" name="email" ng-model="email"><br> <!-- javascript 폼 체크 -->
+		
+		
 		내용: <input type="text" name="content"><br> 
 		비밀번호: <input type="password" name="pass"><br> 
 		<input type="submit" value="제출">
 	</form>
-
-	
+<h1>Hello, {{email}}</h1>
+	</div>
 
 </body>
 </html>

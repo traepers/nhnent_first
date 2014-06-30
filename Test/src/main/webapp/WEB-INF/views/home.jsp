@@ -58,8 +58,9 @@ content {
 	});
 
 	function updateContent(id, content, pass) {
-	//	content = content.split(' ').join("~");
-		window.open("updateContentForm.jsp?id=" + id + "&content=" + content+"&pass="+pass); //
+		//	content = content.split(' ').join("~");
+		window.open("updateContentForm.jsp?id=" + id + "&content=" + content
+				+ "&pass=" + pass); //
 		/*
 		$.ajax({
 			url : "/updateContent?id=" + id + "&content=" + content
@@ -69,10 +70,6 @@ content {
 		});
 		 */
 	}
-
-	function refreshBulletin() {
-		location.reload(true);
-	}
 </script>
 
 <title>NHN Enter first warm-up</title>
@@ -81,44 +78,51 @@ content {
 <body>
 	<div id="fixed-menu">
 		<div align="center">
-			<h2> 방명록 </h2>
+			<h2>방명록</h2>
 		</div>
 	</div>
 
-<!-- 
+	<!-- 
 	<P>The time on the server is ${serverTime}.</P>
  -->
-	<P> 방명록 글자 수 : ${board_length}</P>
- 
-	<table border=1>
-		<%
-			int size = (Integer) request.getAttribute("board_length");
-			BoardVO[] boardVOArr = (BoardVO[]) request
-					.getAttribute("boardVOArr");
-			for (int i = 0; i < size; i++) {
-		%>
-		<tr>
-			<td><%=boardVOArr[i].getEmail()%></td>
-			<td><a href="#"> <span
-					onclick="javascript:updateContent('<%=boardVOArr[i].getId()%>', '<%=boardVOArr[i].getContent()%>', '<%=boardVOArr[i].getPass()%>')">
-						<%=boardVOArr[i].getContent()%>
-				</span>
-			</a></td>
-			<td><%=boardVOArr[i].getTime()%></td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
+ <div align="center">
+	<P>방명록 수 : ${board_length}	&nbsp;&nbsp;&nbsp;	<button type="button"
+			onclick="location.href='javascript:formOpen();' ">새로운 글 게시</button>
+	</P> 
+		<table border=1>
+			<tr>
+				<td align=center>이메일</td>
+				<td align=center>내용</td>
+				<td align=center>작성시간</td>
 
-	<!--  	<a href="form.jsp" target="_blank"></a>
+			</tr>
+			<%
+				int size = (Integer) request.getAttribute("board_length");
+				BoardVO[] boardVOArr = (BoardVO[]) request
+						.getAttribute("boardVOArr");
+				for (int i = 0; i < size; i++) {
+			%>
+			<tr>
+				<td><%=boardVOArr[i].getEmail()%></td>
+				<td><a href="#"> <span
+						onclick="javascript:updateContent('<%=boardVOArr[i].getId()%>', '<%=boardVOArr[i].getContent()%>', '<%=boardVOArr[i].getPass()%>')">
+							<%=boardVOArr[i].getContent()%>
+					</span>
+				</a></td>
+				<td><%=boardVOArr[i].getTime()%></td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+
+		<!--  	<a href="form.jsp" target="_blank"></a>
 	<FORM method="get" action="form.jsp"  target="_blank">
 		<INPUT TYPE="submit" VALUE="새로운 글 게시">
 	</FORM>
 	-->
 
-	<button type="button" onclick="location.href='javascript:formOpen();' ">
-		새로운 글 게시</button>
 
+	</div>
 </body>
 </html>
